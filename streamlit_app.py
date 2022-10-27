@@ -47,28 +47,30 @@ try:
 except URLError as e:
    streamlit.error()
   
+streamlit.header("The FRUIT LOAD LIST CONTAINS:")
+#funktio2 , snoukkaa
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur
+         my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
+         return my_cur.fetchall()
 
-####SIIVOTAAN
-#treamlit.write('The user entered ', fruit_choice)
-  
-# import requests
+#Tehdään actioni - button fruit lataukselle
+if streamlit.button('Get Fruit Load ist'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    streamlit.dataframe(my_data_rows)
 
-# Ei tarvita - streamlit.text(fruityvice_response.json())
-
-# Hakee rivit
-
-# Tekee kehyjset
-####SIIVOUS END
-
+    
 #Koodin debuggaus, stoppi
 streamlit.stop()
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-my_data_rows = my_cur.fetchall()
-streamlit.header("The FRUIT LOAD LIST CONTAINS:")
-streamlit.dataframe(my_data_rows)
+#SIivotaan ylös:
+#my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+#my_cur = my_cnx.cursor()
+#my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
+#my_data_rows = my_cur.fetchall()
+#streamlit.header("The FRUIT LOAD LIST CONTAINS:")
+#streamlit.dataframe(my_data_rows)
 
 #Toka boksi
 add_my_fruit = streamlit.text_input('What fruit would you like to add?','jackfruit')
